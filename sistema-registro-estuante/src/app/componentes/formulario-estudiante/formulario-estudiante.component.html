@@ -1,0 +1,88 @@
+<div class="jumbotron">
+    <h2>
+        {{titulo}}
+    </h2>
+    <p>
+        Diligencie el siguiente formulario para el registro de un estudiante
+    </p>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <form (ngSubmit)="registrar()" #estudianteForm="ngForm" autocomplete="off">
+                    <div class=" form-row ">
+                        <div class="form-group col-md-2 "></div>
+                        <div class="form-group col-md-4 ">
+                            <label for="tipoDocumento">
+                              tipo de documento
+                            </label>
+                            <select class="form-control" name="tipoDocumento" id="tipoDocumento" [(ngModel)]="estudiante.tipoDocumento" [compareWith]="compararTipoDocumeto" required>
+                                <option *ngFor="let tipoDocumento of listaTipoDocumentos" [ngValue]="tipoDocumento" >{{tipoDocumento.nombreDocumento}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4 ">
+                            <label for="numeroDocumento">
+                              Nùmero de documento
+                            </label>
+                            <input type="text" class="form-control" name="numeroDocumento" id="numeroDocumento" #numeroDocumento="ngModel" [(ngModel)]="estudiante.numeroDocumento " placeholder="Digite un número de documento " minlength="3 " required/>
+                            <div class="alert alert-danger " *ngIf="numeroDocumento.invalid && (numeroDocumento.dirty || numeroDocumento.touched) ">
+                                <div *ngIf="numeroDocumento?.errors.required ">El número de documento es requerido</div>
+                                <div *ngIf="numeroDocumento?.errors.minlength ">El número de documento debe tener al menos 3 caracteres</div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-2 "></div>
+                    </div>
+                    <div class="form-row ">
+                        <div class="form-group col-md-2 "></div>
+                        <div class="form-group col-md-4 ">
+                            <label for="nombres">
+                              nombres
+                            </label>
+                            <input type="text" class="form-control" name="nombres" id="nombres" #nombres="ngModel" [(ngModel)]="estudiante.nombres" placeholder="Digite un nombre " minlength="3 " required />
+                            <div class="alert alert-danger " *ngIf="nombres.invalid && (nombres.dirty || nombres.touched) ">
+                                <div *ngIf="nombres?.errors.required ">El nombre del estudiante es requerido</div>
+                                <div *ngIf="nombres?.errors.minlength ">El nombre del estudiante debe tener al menos 3 caracteres</div>
+                            </div>
+
+                        </div>
+                        <div class="form-group col-md-4 ">
+                            <label for="apellidos">
+                              apellidos
+                            </label>
+                            <input type="text" class="form-control " id="apellidos" name="apellidos" #apellidos="ngModel" [(ngModel)]="estudiante.apellidos" placeholder="Digite apellidos" minlength="3" required/>
+                            <div class="alert alert-danger " *ngIf="apellidos.invalid && (apellidos.dirty || apellidos.touched) ">
+                                <div *ngIf="apellidos?.errors.required ">El apellido es requerido</div>
+                                <div *ngIf="apellidos?.errors.minlength ">El apellido debe tener al menos 3 caracteres</div>
+                            </div>
+                        </div>
+
+                        <div class=" form-group col-md-2 "></div>
+                    </div>
+                    <div class="form-row ">
+                        <div class="form-group col-md-2 "></div>
+                        <div class="form-group col-md-4 ">
+                            <label for="institucionEducativa">
+                              Instituciòn educativa
+                            </label>
+                            <select class="form-control" id="institucionEducativa" name="institucionEducativa" [(ngModel)]="estudiante.institucionEducativa" [compareWith]="compararInstitucionEducativa" required>
+                                <option>--seleccione--</option>
+                                <option *ngFor="let institucionEducativa of listaInstitucionesEducativas" [ngValue]="institucionEducativa" >{{institucionEducativa.nombreInstitucionEducativa}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6 "></div>
+                    </div>
+
+
+                    <div class="form-row ">
+                        <div class="form-group col-md-2 "></div>
+                        <div class="form-group col-md-8 ">
+                            <button type="submit " class="btn btn-primary " [disabled]="!estudianteForm.form.valid ">
+                                Aceptar
+                            </button>
+                        </div>
+                        <div class="form-group col-md-2 "></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
