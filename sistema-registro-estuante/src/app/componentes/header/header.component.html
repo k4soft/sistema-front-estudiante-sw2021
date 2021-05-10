@@ -1,22 +1,44 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="navbar-toggler-icon"></span>
-    </button> <a class="navbar-brand" href="#">Sistema de registro de estudiantes</a>
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link" [routerLink]="['home']">Home <span class="sr-only">(current)</span></a>
-            </li>
+<nav class="navbar navbar-expand-lg navbar-light bg-light" *ngIf="isAthenticated()">
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#bs-example-navbar-collapse-1"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="#">Sistema de registro de estudiantes</a>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" [routerLink]="['home']"
+          >Home <span class="sr-only">(current)</span></a
+        >
+      </li>
 
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown">Acciones</a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" [routerLink]="['listar']">Listar estudiantes</a>
-                    <a class="dropdown-item" [routerLink]="['crear']">Registrar estudiantes</a>
+      <li class="nav-item dropdown">
+        <a
+          class="nav-link dropdown-toggle"
+          href="http://example.com"
+          id="navbarDropdownMenuLink"
+          data-toggle="dropdown"
+          >Acciones</a
+        >
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" [routerLink]="['listar']"
+            >Listar estudiantes</a
+          >
+          <a class="dropdown-item" [routerLink]="['crear']"
+            >Registrar estudiantes</a
+          >
+        </div>
+      </li>
+    </ul>
+  </div>
 
-
-                </div>
-            </li>
-        </ul>
-    </div>
+  <ul class="navbar-nav navbar-right">
+    <li>
+        <a class="btn btn-outline-primary" (click)="logout()">Salir</a>
+    </li>
+  </ul>
 </nav>

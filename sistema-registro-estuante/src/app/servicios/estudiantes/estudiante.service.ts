@@ -17,7 +17,7 @@ export class EstudianteService {
   constructor(private http: HttpClient,private parametroConexion: ParametroConexion) { }
 
   listarEstudiantes(): Observable<Estudiante[]>{
-    return this.http.get<Estudiante[]>(this.endPoint);
+    return this.http.get<Estudiante[]>(this.endPoint, { headers: this.parametroConexion.getSimpleHeader()});
   }
 
   insertar(comandoEstudiante: ComandoEstudiante): Observable<Estudiante> {
@@ -30,7 +30,7 @@ export class EstudianteService {
   }
 
   consultarPorId(idEstudiante: number): Observable<Estudiante>{
-    return this.http.get<Estudiante>(`${this.endPoint}/${idEstudiante}`);
+    return this.http.get<Estudiante>(`${this.endPoint}/${idEstudiante}`, { headers: this.parametroConexion.getSimpleHeader()});
   }
 
 }

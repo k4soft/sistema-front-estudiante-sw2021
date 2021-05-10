@@ -10,6 +10,8 @@ const END_POINT = 'http://localhost:8082/oauth/token';
 })
 export class LoginService {
 
+  private usuario: Usuario;
+
   constructor(private http: HttpClient) { }
 
   login(usuario: Usuario): Observable<any> {
@@ -26,6 +28,35 @@ export class LoginService {
     params.set('username', usuario.username);
     params.set('password', usuario.password);
     return this.http.post<any>(END_POINT, params.toString(),{ headers: httpHeaders});
+  }
+
+  guardarUsuario(accessToken: string): void{
+    const payload = this.getPayload(accessToken);
+    this.usuario = new Usuario();
+    this.usuario.username = payload.user_name;
+    this.usuario.roles = payload.authorities;
+    sessionStorage.setItem('usuario', JSON.stringify(this.usuario));
+  }
+
+  guardarToken(accessToken: string){
+    sessionStorage.setItem('token', accessToken);
+  }
+
+  getPayload(accessToken: string) : any{
+     if(accessToken !== undefined){
+       return JSON.parse(atob(accessToken.split('.')[1]));
+     }
+     return null;
+  }
+  logout(){
+     this.usuario = null;
+     sessionStorage.clear();
+     sessionStorage.removeItem('usuario');
+     sessionStorage.removeItem('token');
+  }
+
+  isAuthenticated(): boolean{
+    return sessionStorage.getItem('usuario') != null;
   }
 
 }

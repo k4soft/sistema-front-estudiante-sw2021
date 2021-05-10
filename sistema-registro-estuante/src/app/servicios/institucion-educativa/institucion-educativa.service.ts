@@ -11,6 +11,6 @@ export class InstitucionEducativaService {
   constructor(private http: HttpClient, private parametroConexion : ParametroConexion) { }
 
   listarInstitucionesEducativas(): Observable<InstitucionEducativa[]>{
-    return this.http.get<InstitucionEducativa[]>(this.parametroConexion.getUrlBase().concat('/v1/instituciones-educativas'));
+    return this.http.get<InstitucionEducativa[]>(this.parametroConexion.getUrlBase().concat('/v1/instituciones-educativas') , { headers: this.parametroConexion.getSimpleHeader()});
   }
 }
