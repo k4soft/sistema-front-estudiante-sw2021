@@ -1,0 +1,30 @@
+version: '3.7'
+services: 
+    my-sql-docker-compose:
+        image: mysql:8
+        ports: 
+            - "3306:3306"
+        restart: always
+        networks: 
+            - red-estudiantes-sw
+        environment: 
+            MYSQL_DATABASE: estudiantes
+            MYSQL_ROOT_PASSWORD: root
+            MY_ROOT_HOST: '%'
+    api-rest-estudiantes-docker-compose:
+        image: api-estudiantes
+        ports: 
+            - "8083:8083"
+        restart: always
+        networks: 
+            - red-estudiantes-sw
+        depends_on: 
+            - my-sql-docker-compose
+    front-end-estudiantes-docker-compose:
+        image: front-estudiantes
+        ports: 
+            - "8888:80"
+        networks: 
+            - red-estudiantes-sw
+networks: 
+    red-estudiantes-sw:
